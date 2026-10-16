@@ -1,0 +1,26 @@
+import SwiftUI
+
+struct MoreView: View {
+    @Environment(DemoStore.self) private var store
+    @State private var resetConfirmation = false
+    var body: some View {
+        List {
+            Section("Workspace") {
+                Label("Inventolo Demo", systemImage: "building.2")
+                Label("Local demo mode", systemImage: "iphone.gen3")
+            }
+            Section("Status") {
+                LabeledContent("Last local save", value: store.lastSaved?.formatted(date: .abbreviated, time: .shortened) ?? "Never")
+                LabeledContent("Pending server sync", value: "Unavailable")
+                Text("The Inventolo API is not configured. No records are sent to a server.").font(.caption).foregroundStyle(.secondary)
+            }
+            Section("Insights") { NavigationLink { ReportsView() } label: { Label("Reports", systemImage: "chart.bar.xaxis") } }
+            Section("Data") { Button("Reset demo data", role: .destructive) { resetConfirmation = true } }
+            Section("About") { Text("SmartERP Mobile · Native iOS preview").foregroundStyle(.secondary) }
+        }
+        .navigationTitle("More")
+        .confirmationDialog("Reset all local demo records?", isPresented: $resetConfirmation) {
+            Button("Reset demo data", role: .destructive) { store.reset() }
+        }
+    }
+}
