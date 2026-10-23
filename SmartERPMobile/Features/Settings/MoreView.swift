@@ -14,7 +14,10 @@ struct MoreView: View {
                 LabeledContent("Pending server sync", value: "Unavailable")
                 Text("The Inventolo API is not configured. No records are sent to a server.").font(.caption).foregroundStyle(.secondary)
             }
-            Section("Insights") { NavigationLink { ReportsView() } label: { Label("Reports", systemImage: "chart.bar.xaxis") } }
+            Section("Insights") {
+                NavigationLink { AssistantView() } label: { Label("Smart Assistant", systemImage: "sparkles") }
+                NavigationLink { ReportsView() } label: { Label("Reports", systemImage: "chart.bar.xaxis") }
+            }
             Section("Data") { Button("Reset demo data", role: .destructive) { resetConfirmation = true } }
             Section("About") { Text("SmartERP Mobile · Native iOS preview").foregroundStyle(.secondary) }
         }

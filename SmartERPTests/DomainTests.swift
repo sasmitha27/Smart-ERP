@@ -64,6 +64,53 @@ struct DomainModelTests {
     }
 }
 
+@Suite("Business assistant")
+struct BusinessAssistantTests {
+    private let snapshot = BusinessSnapshot(
+        products: [
+            .init(name: "Ceramic Mug", stock: 3, reorderLevel: 5, cost: 990),
+            .init(name: "Coffee", stock: 12, reorderLevel: 5, cost: 2_100)
+        ],
+        invoices: [
+            .init(customerName: "ABC Distributors", total: 10_000, paid: 4_000, outstanding: 6_000),
+            .init(customerName: "ABC Distributors", total: 5_000, paid: 5_000, outstanding: 0),
+            .init(customerName: "Sunrise Retail", total: 8_000, paid: 6_000, outstanding: 2_000)
+        ],
+        orderCount: 2,
+        orderValue: 18_000,
+        purchaseCount: 1,
+        plannedVisitCount: 3,
+        completedVisitCount: 1
+    )
+
+    @Test("Low-stock answers include only products at their reorder level")
+    func lowStock() {
+        let answer = BusinessAssistant.answer(question: "What is running low?", snapshot: snapshot)
+
+        #expect(answer.title == "Low-stock products")
+        #expect(answer.body.contains("Ceramic Mug"))
+        #expect(!answer.body.contains("Coffee"))
+    }
+
+    @Test("Receivables aggregate verified outstanding balances")
+    func receivables() {
+        let answer = BusinessAssistant.answer(question: "How much is unpaid?", snapshot: snapshot)
+
+        #expect(answer.title == "Outstanding receivables")
+        #expect(answer.body.contains("ABC Distributors"))
+        #expect(answer.body.contains("Sunrise Retail"))
+        #expect(answer.body.contains(Money.format(8_000)))
+    }
+
+    @Test("Top customer is based on total invoiced value")
+    func topCustomer() {
+        let answer = BusinessAssistant.answer(question: "Who is my top customer?", snapshot: snapshot)
+
+        #expect(answer.body.contains("ABC Distributors"))
+        #expect(answer.body.contains(Money.format(15_000)))
+    }
+}
+
 /// DemoStore writes a shared demo snapshot, so these tests run serially to keep their fixtures isolated.
 @Suite("Demo store", .serialized)
 @MainActor

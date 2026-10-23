@@ -26,6 +26,28 @@ struct DashboardView: View {
                     MetricCard(title: "Pending orders", value: "\(store.orders.count)", symbol: "bag", color: Theme.teal)
                     MetricCard(title: "Low stock", value: "\(store.products.filter { $0.stock <= $0.reorderLevel }.count)", symbol: "exclamationmark.triangle", color: Theme.red)
                 }
+                NavigationLink {
+                    AssistantView()
+                } label: {
+                    HStack(spacing: 14) {
+                        Image(systemName: "sparkles")
+                            .font(.title2)
+                            .foregroundStyle(Theme.blue)
+                        VStack(alignment: .leading, spacing: 3) {
+                            Text("Ask Smart Assistant")
+                                .font(.headline)
+                            Text("Get verified insights from your local business data")
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+                        }
+                        Spacer()
+                        Image(systemName: "chevron.right")
+                            .foregroundStyle(.tertiary)
+                    }
+                    .padding(16)
+                    .background(Theme.surface, in: RoundedRectangle(cornerRadius: 18))
+                }
+                .buttonStyle(.plain)
                 SectionTitle("Quick actions", subtitle: "Pick up where your team left off")
                 HStack(spacing: 10) {
                     quick("Customer", "person.badge.plus", .customer)
