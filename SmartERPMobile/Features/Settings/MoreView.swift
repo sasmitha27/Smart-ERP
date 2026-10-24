@@ -11,9 +11,9 @@ struct MoreView: View {
             }
             Section("Status") {
                 LabeledContent("Last local save", value: store.lastSaved?.formatted(date: .abbreviated, time: .shortened) ?? "Never")
-                LabeledContent("Pending server sync", value: "Unavailable")
-                Text("The Inventolo API is not configured. No records are sent to a server.").font(.caption).foregroundStyle(.secondary)
+                Text("Firebase backup runs only when you choose upload or restore.").font(.caption).foregroundStyle(.secondary)
             }
+            Section("Cloud") { NavigationLink { FirebaseBackupView() } label: { Label("Firebase backup", systemImage: "externaldrive.badge.icloud") } }
             Section("Insights") {
                 NavigationLink { AssistantView() } label: { Label("Smart Assistant", systemImage: "sparkles") }
                 NavigationLink { ReportsView() } label: { Label("Reports", systemImage: "chart.bar.xaxis") }

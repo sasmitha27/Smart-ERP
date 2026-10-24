@@ -2,7 +2,7 @@
 
 Native iPhone ERP prototype for iOS 17 and later. Open `SmartERPMobile.xcodeproj` in Xcode 27.
 
-The app starts in an explicitly labelled **local demo workspace**. Customer, product, order, purchase, receipt, invoice and visit data is stored on device for evaluation. No demo action posts to Inventolo or sends notifications to other people. Financial and stock records in this workspace are sample records, not authoritative business records.
+The app starts in an explicitly labelled **local demo workspace**. Customer, product, order, purchase, receipt, invoice and visit data is stored on device for evaluation. No demo action posts to Inventolo or sends notifications to other people. Firebase upload occurs only when explicitly requested in settings. Financial and stock records in this workspace are sample records, not authoritative business records.
 
 ## Run
 
@@ -34,7 +34,7 @@ SmartERPMobile/
 SmartERPTests/           Domain and local receipt tests
 ```
 
-**Suggested walkthrough:** Start at `App/SmartERPApp.swift`: it creates `DemoStore` and injects it into the UI. `App/RootView.swift` chooses the welcome screen or the five main tabs. Open a feature folder to show its SwiftUI screens. The screens read models from `Domain/Models.swift` and call methods on `Data/DemoStore.swift` to change local data. `DemoStore` saves a JSON snapshot on the device. `Core/APIClient.swift` is only a foundation for future backend integration; the current screens do not call it.
+**Suggested walkthrough:** Start at `App/SmartERPApp.swift`: it creates `DemoStore` and injects it into the UI. `App/RootView.swift` chooses the welcome screen or the five main tabs. Open a feature folder to show its SwiftUI screens. The screens read models from `Domain/Models.swift` and call methods on `Data/DemoStore.swift` to change local data. `DemoStore` saves a JSON snapshot in SwiftData on the device. `Core/APIClient.swift` is a foundation for future Inventolo backend integration; the current screens do not call it. Firebase backup is a separate explicit option in Settings.
 
 For a concrete example, demonstrate **Purchasing → New purchase → Receive goods**. The shared transaction form creates a purchase draft through `DemoStore.addPurchase`; `ReceivingForm` calls `DemoStore.receive`, which caps received quantities and updates the matching product's local stock. `SmartERPTests/DomainTests.swift` checks this partial receipt rule. This shows the UI, data flow, and a tested business rule in one short path.
 
@@ -48,9 +48,34 @@ The Inventolo API specification and credentials were not supplied. The app delib
 
 - Camera usage is declared for barcode capture. Scanning never posts stock movements.
 - Foreground location permission is requested only after a salesperson starts an explicit demo work session. The map shows demo team positions with timestamps and labels them as sample data.
-- Background location, geofence monitoring, APNs, widgets and Live Activities require approved product behavior, backend contracts, entitlements and physical-device validation. They are not enabled in this prototype.
+- Background location, geofence monitoring, and APNs are not enabled. Widgets and local Live Activities are included and need physical-device validation and correct signing identifiers.
 - No employee location is silently collected. Ending a session stops location updates.
 
 ## Production checklist
 
-Connect the documented API; add server permission checks and token refresh; implement encrypted/isolated caches and a durable sync queue; add App Group and Widget extension after shared-data privacy rules are agreed; configure APNs and server delivery; add localization for Sinhala and Tamil; test camera, location and notifications on physical devices; complete accessibility and App Store privacy review.
+Connect the documented API; add server permission checks and token refresh; implement encrypted/isolated caches and a durable sync queue; configure the App Group and Widget extension with production signing identifiers; configure APNs and server delivery; add localization for Sinhala and Tamil; test camera, location and notifications on physical devices; complete accessibility and App Store privacy review.
+
+## Map, widgets, Live Activity, and Firebase backup
+
+The visit map shows saved assignments, lets you select and recenter on a visit, and opens driving directions in Apple Maps. The user-location control uses the system location permission. Visit pins are assignments, not live colleague positions.
+
+The `SmartERPWidgets` extension provides **Business overview** and **Next visit** Home Screen widgets using an App Group snapshot written after each local save. The work-session screen starts a Live Activity after foreground location is authorized, and ends it when you end the session. Location is not uploaded. Widgets refresh on saves and the system's timeline; they are not a continuous feed. Live Activities use local ActivityKit updates; remote push updates are not configured.
+
+For a signed device build, replace `com.example.SmartERPMobile`, `com.example.SmartERPMobile.widgets`, and `group.com.example.SmartERPMobile` consistently with identifiers owned by your Apple Developer team. Enable the App Groups capability for both targets and register the group. Enable Live Activities for the app if your signing setup requires it.
+
+Firebase backup uses Firebase Authentication and Firestore REST APIs. In the Firebase console, create a Firestore database and enable **Anonymous** sign-in. In **More → Firebase backup**, enter the Firebase project ID and Web API key. Upload explicitly saves the full local demo snapshot to `users/{auth.uid}/backups/current`; restore explicitly replaces local records after confirmation. The anonymous refresh token is stored in Keychain on this installation. Losing the installation or Keychain identity means that this backup cannot be restored by a new anonymous identity. This is a single-device evaluation backup, not multi-user ERP sync.
+
+A minimal Firestore rule for this backup path is:
+
+```text
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /users/{userId}/backups/{backupId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+  }
+}
+```
+
+Publish rules in the Firebase console before using backup. Set stricter size and validation limits before production use. Firebase credentials were not supplied in this repository, so the live cloud round trip needs validation with your project.

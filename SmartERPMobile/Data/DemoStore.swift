@@ -1,6 +1,7 @@
 import Foundation
 import Observation
 import SwiftData
+import WidgetKit
 
 @Model
 final class DatabaseSnapshotRecord {
@@ -86,6 +87,22 @@ final class DemoStore {
         }
     }
 
+    func exportSnapshot() throws -> Data {
+        try JSONEncoder().encode(Snapshot(customers: customers, products: products, orders: orders, purchases: purchases, invoices: invoices, visits: visits))
+    }
+
+    func importSnapshot(_ data: Data) throws {
+        let snapshot = try JSONDecoder().decode(Snapshot.self, from: data)
+        apply(snapshot)
+        save()
+    }
+
+    private func publishWidgets() {
+        let next = visits.filter { $0.completedAt == nil && $0.scheduledAt >= .now }.min { $0.scheduledAt < $1.scheduledAt }
+        WidgetData.write(ERPWidgetSnapshot(pendingOrders: orders.count, lowStock: products.filter { $0.stock <= $0.reorderLevel }.count, nextVisit: next?.name, nextVisitAt: next?.scheduledAt, updatedAt: .now))
+        WidgetCenter.shared.reloadAllTimelines()
+    }
+
     private func apply(_ snapshot: Snapshot) {
         customers = snapshot.customers
         products = snapshot.products
@@ -93,6 +110,7 @@ final class DemoStore {
         purchases = snapshot.purchases
         invoices = snapshot.invoices
         visits = snapshot.visits
+        publishWidgets()
     }
 
     private func seed() {
@@ -132,6 +150,7 @@ final class DemoStore {
 
             try modelContext.save()
             lastSaved = savedAt
+            publishWidgets()
         } catch {
             modelContext.rollback()
             message = "Could not save to the local database: \(error.localizedDescription)"
