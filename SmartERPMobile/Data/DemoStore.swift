@@ -1,5 +1,19 @@
 import Foundation
 import Observation
+import SwiftData
+
+@Model
+final class DatabaseSnapshotRecord {
+    @Attribute(.unique) var key: String
+    var payload: Data
+    var updatedAt: Date
+
+    init(key: String = "primary", payload: Data, updatedAt: Date = .now) {
+        self.key = key
+        self.payload = payload
+        self.updatedAt = updatedAt
+    }
+}
 
 @MainActor @Observable
 final class DemoStore {
@@ -23,23 +37,62 @@ final class DemoStore {
         var visits: [Visit]
     }
 
-    private let fileURL: URL = {
+    @ObservationIgnored private var modelContainer: ModelContainer?
+    @ObservationIgnored private var modelContext: ModelContext?
+
+    private let legacyFileURL: URL = {
         let base = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]
         return base.appendingPathComponent("SmartERP/demo-data.json")
     }()
 
     init() {
-        if let data = try? Data(contentsOf: fileURL), let snapshot = try? JSONDecoder().decode(Snapshot.self, from: data) {
-            customers = snapshot.customers
-            products = snapshot.products
-            orders = snapshot.orders
-            purchases = snapshot.purchases
-            invoices = snapshot.invoices
-            visits = snapshot.visits
-            lastSaved = (try? fileURL.resourceValues(forKeys: [.contentModificationDateKey]))?.contentModificationDate
+        do {
+            let container = try ModelContainer(for: DatabaseSnapshotRecord.self)
+            modelContainer = container
+            modelContext = ModelContext(container)
+        } catch {
+            message = "Could not open the local database: \(error.localizedDescription)"
+        }
+
+        if loadFromDatabase() {
+            return
+        }
+
+        // Migrate data written by earlier versions of the app into SwiftData.
+        if let data = try? Data(contentsOf: legacyFileURL),
+           let snapshot = try? JSONDecoder().decode(Snapshot.self, from: data) {
+            apply(snapshot)
+            save()
+            try? FileManager.default.removeItem(at: legacyFileURL)
         } else {
             seed()
         }
+    }
+
+    private func loadFromDatabase() -> Bool {
+        guard let modelContext else { return false }
+
+        do {
+            var descriptor = FetchDescriptor<DatabaseSnapshotRecord>()
+            descriptor.fetchLimit = 1
+            guard let record = try modelContext.fetch(descriptor).first else { return false }
+            let snapshot = try JSONDecoder().decode(Snapshot.self, from: record.payload)
+            apply(snapshot)
+            lastSaved = record.updatedAt
+            return true
+        } catch {
+            message = "Could not read the local database: \(error.localizedDescription)"
+            return false
+        }
+    }
+
+    private func apply(_ snapshot: Snapshot) {
+        customers = snapshot.customers
+        products = snapshot.products
+        orders = snapshot.orders
+        purchases = snapshot.purchases
+        invoices = snapshot.invoices
+        visits = snapshot.visits
     }
 
     private func seed() {
@@ -56,14 +109,32 @@ final class DemoStore {
     }
 
     func save() {
+        guard let modelContext else {
+            if message == nil {
+                message = "The local database is unavailable. Changes will not persist."
+            }
+            return
+        }
+
         let snapshot = Snapshot(customers: customers, products: products, orders: orders, purchases: purchases, invoices: invoices, visits: visits)
         do {
-            try FileManager.default.createDirectory(at: fileURL.deletingLastPathComponent(), withIntermediateDirectories: true)
             let data = try JSONEncoder().encode(snapshot)
-            try data.write(to: fileURL, options: .atomic)
-            lastSaved = .now
+            var descriptor = FetchDescriptor<DatabaseSnapshotRecord>()
+            descriptor.fetchLimit = 1
+            let savedAt = Date.now
+
+            if let record = try modelContext.fetch(descriptor).first {
+                record.payload = data
+                record.updatedAt = savedAt
+            } else {
+                modelContext.insert(DatabaseSnapshotRecord(payload: data, updatedAt: savedAt))
+            }
+
+            try modelContext.save()
+            lastSaved = savedAt
         } catch {
-            message = "Could not save local demo data: \(error.localizedDescription)"
+            modelContext.rollback()
+            message = "Could not save to the local database: \(error.localizedDescription)"
         }
     }
 
