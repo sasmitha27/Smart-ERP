@@ -1,16 +1,18 @@
 # SmartERP Mobile
 
-Native iPhone ERP prototype for iOS 17 and later. Open `SmartERPMobile.xcodeproj` in Xcode 27.
+Native iPhone and iPad ERP prototype for iOS 17 and later. Open `SmartERPMobile.xcodeproj` in Xcode 27.
 
 The app starts with a choice between a local demo workspace and Google sign-in for a separate account workspace. Customer, product, order, purchase, receipt, invoice and visit data is stored on device for evaluation. No demo action posts to Inventolo or sends notifications to other people. Firebase upload occurs only when explicitly requested in settings. Financial and stock records in this workspace are sample records, not authoritative business records.
 
 ## Run
 
-1. Select the `SmartERPMobile` scheme and an iPhone simulator.
+1. Select the `SmartERPMobile` scheme and an iPhone or iPad Pro 11-inch simulator.
 2. Build and run. Onboarding explains the demo boundary.
-3. For barcode scanning, use a physical iPhone; the simulator offers manual barcode entry.
+3. For barcode scanning, use a physical iPhone or iPad; the simulator offers manual barcode entry.
 
 Run `xcodebuild -project SmartERPMobile.xcodeproj -scheme SmartERPMobile -destination 'platform=iOS Simulator,name=iPhone 17 Pro' test` for the included domain tests.
+
+On iPad, the five main areas appear in a sidebar and the overview, reports, and welcome screen use a centered reading width. In compact Split View, the app uses the same tab navigation as iPhone.
 
 ## Project structure and viva walkthrough
 

@@ -56,7 +56,10 @@ struct ReportsView: View {
                 }
                 Text("Updated \((store.lastSaved ?? .now).formatted(date: .abbreviated, time: .shortened))")
                     .font(.caption).foregroundStyle(.secondary)
-            }.padding()
+            }
+            .frame(maxWidth: 960)
+            .frame(maxWidth: .infinity)
+            .padding()
         }
         .background(Theme.background)
         .navigationTitle("Reports")

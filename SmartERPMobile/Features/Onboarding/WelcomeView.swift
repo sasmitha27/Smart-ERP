@@ -38,6 +38,8 @@ struct WelcomeView: View {
                 Spacer()
             }
             .padding(24)
+            .frame(maxWidth: 620)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
         }
     }

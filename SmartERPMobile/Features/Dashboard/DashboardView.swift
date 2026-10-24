@@ -69,6 +69,8 @@ struct DashboardView: View {
                     }
                 }
             }
+            .frame(maxWidth: 960)
+            .frame(maxWidth: .infinity)
             .padding()
         }
         .background(Theme.background)
