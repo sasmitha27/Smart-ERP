@@ -36,6 +36,8 @@
 		B20000000000000000000003 /* SmartERPMobile/Core/GoogleAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000000000000000000006 /* SmartERPMobile/Core/GoogleAuthService.swift */; };
 		B20000000000000000000008 /* SmartERPMobile/Features/Onboarding/GoogleLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000000000000000000009 /* SmartERPMobile/Features/Onboarding/GoogleLoginView.swift */; };
 		DAD5CE1CE4A3ABD7C0C80F22 /* SmartERPTests/DomainTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FCB7650B9AEDE18C07CAE2 /* SmartERPTests/DomainTests.swift */; };
+		C30000000000000000000001 /* SmartERPTests/FirebaseSettingsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C30000000000000000000003 /* SmartERPTests/FirebaseSettingsTests.swift */; };
+		C30000000000000000000002 /* SmartERPTests/DemoStoreSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C30000000000000000000004 /* SmartERPTests/DemoStoreSnapshotTests.swift */; };
 		DB564AC5418E0D827BE6CE8F /* SmartERPMobile/Features/Sales/OrderAndInvoiceViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25119872E79719B90560D8F /* SmartERPMobile/Features/Sales/OrderAndInvoiceViews.swift */; };
 		E2E475D77E08D1BDADFE535C /* SmartERPMobile/Features/Purchasing/PurchasingViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11AC9EEC5F4FE23FE1B5C5B /* SmartERPMobile/Features/Purchasing/PurchasingViews.swift */; };
 		E5FED998CC77DC8986B04B48 /* SmartERPMobile/Features/Customers/CustomerViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6BDC2AFADFD3C2CA99A134 /* SmartERPMobile/Features/Customers/CustomerViews.swift */; };
@@ -77,6 +79,8 @@
 
 /* Begin PBXFileReference section */
 		19FCB7650B9AEDE18C07CAE2 /* SmartERPTests/DomainTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartERPTests/DomainTests.swift; sourceTree = "<group>"; };
+		C30000000000000000000003 /* SmartERPTests/FirebaseSettingsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartERPTests/FirebaseSettingsTests.swift; sourceTree = "<group>"; };
+		C30000000000000000000004 /* SmartERPTests/DemoStoreSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartERPTests/DemoStoreSnapshotTests.swift; sourceTree = "<group>"; };
 		5982A07B4928CD684BC3C402 /* SmartERPMobile/Core/BarcodeScanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartERPMobile/Core/BarcodeScanner.swift; sourceTree = "<group>"; };
 		6D795F13C8C22E022040EE00 /* SmartERPMobile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; path = SmartERPMobile.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		709E53BB3C17A2A7C657BDC2 /* SmartERPMobile/Features/Transactions/TransactionForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartERPMobile/Features/Transactions/TransactionForm.swift; sourceTree = "<group>"; };
@@ -223,6 +227,8 @@
 			children = (
 				AC6A85F35997B1D374475287 /* SmartERPMobile */,
 				19FCB7650B9AEDE18C07CAE2 /* SmartERPTests/DomainTests.swift */,
+				C30000000000000000000003 /* SmartERPTests/FirebaseSettingsTests.swift */,
+				C30000000000000000000004 /* SmartERPTests/DemoStoreSnapshotTests.swift */,
 				A10000000000000000000023 /* SmartERPWidgets */,
 				7168E62E5CDB0DF79ADF5742 /* Products */,
 			);
@@ -431,6 +437,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				DAD5CE1CE4A3ABD7C0C80F22 /* SmartERPTests/DomainTests.swift in Sources */,
+				C30000000000000000000001 /* SmartERPTests/FirebaseSettingsTests.swift in Sources */,
+				C30000000000000000000002 /* SmartERPTests/DemoStoreSnapshotTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -527,6 +535,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = "";
+				ENABLE_DEBUG_DYLIB = NO;
 				ENABLE_TESTABILITY = YES;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = SmartERPMobile/Info.plist;
@@ -579,6 +588,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.SmartERPMobileTests;
 				PRODUCT_NAME = SmartERPTests;
 				SDKROOT = iphoneos;
@@ -594,6 +604,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.SmartERPMobileTests;
 				PRODUCT_NAME = SmartERPTests;
 				SDKROOT = iphoneos;
@@ -643,6 +654,7 @@
 				CODE_SIGN_ENTITLEMENTS = SmartERPMobile/SmartERPMobile.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
+				ENABLE_DEBUG_DYLIB = NO;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = SmartERPMobile/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "Scan product barcodes for lookup and transaction drafts.";

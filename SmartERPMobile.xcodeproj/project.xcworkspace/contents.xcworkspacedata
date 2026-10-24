@@ -4,4 +4,11 @@
    <FileRef
       location = "self:">
    </FileRef>
+   <Group
+      location = "group:SmartERPTests"
+      name = "SmartERPTests">
+      <FileRef
+         location = "group:FirebaseSettingsTests.swift">
+      </FileRef>
+   </Group>
 </Workspace>
