@@ -2,6 +2,7 @@ import SwiftUI
 
 struct FirebaseBackupView: View {
     @Environment(DemoStore.self) private var store
+    @Environment(GoogleAuthService.self) private var auth
     @AppStorage("firebaseProjectID") private var projectID = ""
     @AppStorage("firebaseAPIKey") private var apiKey = ""
     @State private var busy = false
@@ -15,12 +16,19 @@ struct FirebaseBackupView: View {
             Section("Firebase project") {
                 TextField("Project ID", text: $projectID).textInputAutocapitalization(.never).autocorrectionDisabled()
                 SecureField("Web API key", text: $apiKey).textInputAutocapitalization(.never)
-                Text("Enable Anonymous Authentication and create a Firestore database in the Firebase console. This installation keeps its anonymous identity in Keychain.")
+                Text("Enable Google Authentication and create a Firestore database in the Firebase console.")
                     .font(.caption).foregroundStyle(.secondary)
             }
+            Section("Account") {
+                if let account = auth.account, account.projectID == backup.settings.projectID {
+                    Text(account.email.isEmpty ? account.displayName : account.email)
+                } else {
+                    NavigationLink("Sign in with Google") { GoogleLoginView() }
+                }
+            }
             Section("Cloud backup") {
-                Button("Upload local snapshot") { Task { await upload() } }.disabled(busy || !backup.settings.isValid)
-                Button("Restore cloud snapshot") { confirmRestore = true }.disabled(busy || !backup.settings.isValid)
+                Button("Upload local snapshot") { Task { await upload() } }.disabled(busy || !backup.settings.isValid || auth.account?.projectID != backup.settings.projectID)
+                Button("Restore cloud snapshot") { confirmRestore = true }.disabled(busy || !backup.settings.isValid || auth.account?.projectID != backup.settings.projectID)
                 if busy { ProgressView() }
                 if !status.isEmpty { Text(status).font(.caption) }
                 Text("Upload and restore are manual. Restoring replaces all local demo records on this device.")

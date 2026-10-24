@@ -17,18 +17,21 @@ enum FirebaseBackupError: LocalizedError {
         case .configuration: "Enter a Firebase project ID and Web API key."
         case .response: "Firebase returned an unexpected response."
         case .server(let detail): detail
-        case .noBackup: "No cloud backup exists for this installation."
+        case .noBackup: "No cloud backup exists for this Google account."
         }
     }
 }
 
-private struct FirebaseSession: Codable {
+struct FirebaseSession: Codable {
     var projectID: String
     var localID: String
     var refreshToken: String
+    var provider: String?
+    var email: String?
+    var displayName: String?
 }
 
-private enum FirebaseSessionVault {
+enum FirebaseSessionVault {
     static let service = "com.smarterp.firebase.backup"
     static func read() -> FirebaseSession? {
         let query: [String: Any] = [kSecClass as String: kSecClassGenericPassword, kSecAttrService as String: service,
@@ -37,6 +40,10 @@ private enum FirebaseSessionVault {
         guard SecItemCopyMatching(query as CFDictionary, &result) == errSecSuccess,
               let data = result as? Data else { return nil }
         return try? JSONDecoder().decode(FirebaseSession.self, from: data)
+    }
+    static func clear() {
+        let query: [String: Any] = [kSecClass as String: kSecClassGenericPassword, kSecAttrService as String: service]
+        SecItemDelete(query as CFDictionary)
     }
     static func write(_ session: FirebaseSession) throws {
         let query: [String: Any] = [kSecClass as String: kSecClassGenericPassword, kSecAttrService as String: service]
@@ -72,34 +79,32 @@ struct FirebaseBackup {
 
     private func authenticatedUser() async throws -> (uid: String, token: String) {
         guard settings.isValid else { throw FirebaseBackupError.configuration }
-        if let saved = FirebaseSessionVault.read(), saved.projectID == settings.projectID {
-            var parts = URLComponents(string: "https://securetoken.googleapis.com/v1/token")!
-            parts.queryItems = [URLQueryItem(name: "key", value: settings.apiKey)]
-            let form = "grant_type=refresh_token&refresh_token=\(saved.refreshToken.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")"
-            var refreshRequest = URLRequest(url: parts.url!)
-            refreshRequest.httpMethod = "POST"
-            refreshRequest.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
-            refreshRequest.httpBody = Data(form.utf8)
-            if let (data, response) = try? await session.data(for: refreshRequest),
-               let http = response as? HTTPURLResponse, (200..<300).contains(http.statusCode),
-               let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
-               let token = json["id_token"] as? String {
-                if let refreshed = json["refresh_token"] as? String {
-                    try FirebaseSessionVault.write(FirebaseSession(projectID: settings.projectID, localID: saved.localID, refreshToken: refreshed))
-                }
-                return (saved.localID, token)
-            }
-            throw FirebaseBackupError.server("Could not refresh this installation’s Firebase sign-in. The existing backup was not changed.")
+        guard let saved = FirebaseSessionVault.read(), saved.projectID == settings.projectID,
+              saved.provider == "google" else {
+            throw FirebaseBackupError.server("Sign in with Google to use Firebase backup.")
         }
-        var parts = URLComponents(string: "https://identitytoolkit.googleapis.com/v1/accounts:signUp")!
+        var parts = URLComponents(string: "https://securetoken.googleapis.com/v1/token")!
         parts.queryItems = [URLQueryItem(name: "key", value: settings.apiKey)]
-        let data = try await request(parts.url!, method: "POST", body: Data("{}".utf8))
-        guard let json = try JSONSerialization.jsonObject(with: data) as? [String: Any],
-              let uid = json["localId"] as? String,
-              let token = json["idToken"] as? String,
-              let refresh = json["refreshToken"] as? String else { throw FirebaseBackupError.response }
-        try FirebaseSessionVault.write(FirebaseSession(projectID: settings.projectID, localID: uid, refreshToken: refresh))
-        return (uid, token)
+        var form = URLComponents()
+        form.queryItems = [URLQueryItem(name: "grant_type", value: "refresh_token"),
+                           URLQueryItem(name: "refresh_token", value: saved.refreshToken)]
+        var refreshRequest = URLRequest(url: parts.url!)
+        refreshRequest.httpMethod = "POST"
+        refreshRequest.timeoutInterval = 30
+        refreshRequest.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+        refreshRequest.httpBody = Data((form.percentEncodedQuery ?? "").utf8)
+        let (data, response) = try await session.data(for: refreshRequest)
+        guard let http = response as? HTTPURLResponse, (200..<300).contains(http.statusCode),
+              let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
+              let token = json["id_token"] as? String else {
+            throw FirebaseBackupError.server("Google sign-in expired. Sign out and sign in again.")
+        }
+        if let refreshed = json["refresh_token"] as? String {
+            var next = saved
+            next.refreshToken = refreshed
+            try FirebaseSessionVault.write(next)
+        }
+        return (saved.localID, token)
     }
 
     private func documentURL(uid: String) throws -> URL {
@@ -108,6 +113,10 @@ struct FirebaseBackup {
             throw FirebaseBackupError.configuration
         }
         return url
+    }
+
+    func validateSignIn() async throws {
+        _ = try await authenticatedUser()
     }
 
     func upload(_ snapshot: Data) async throws {

@@ -4,7 +4,8 @@ struct WelcomeView: View {
     @Environment(DemoStore.self) private var store
 
     var body: some View {
-        ZStack {
+        NavigationStack {
+            ZStack {
             Theme.background.ignoresSafeArea()
             VStack(alignment: .leading, spacing: 24) {
                 Spacer()
@@ -26,15 +27,18 @@ struct WelcomeView: View {
                             .font(.caption.weight(.semibold)).foregroundStyle(Theme.blue)
                     }
                 }
-                Button { store.hasEntered = true } label: {
+                Button { store.switchWorkspace(to: nil); store.hasEntered = true } label: {
                     Text("Explore demo").frame(maxWidth: .infinity).padding(16)
                 }
                 .buttonStyle(.borderedProminent).controlSize(.large)
-                Text("Inventolo account sign-in will be available after the API contract is connected.")
+                NavigationLink("Sign in with Google") { GoogleLoginView() }
+                    .frame(maxWidth: .infinity)
+                Text("Google sign-in connects Firebase backup. Inventolo service login is not configured.")
                     .font(.caption).foregroundStyle(.secondary)
                 Spacer()
             }
             .padding(24)
+            }
         }
     }
 }

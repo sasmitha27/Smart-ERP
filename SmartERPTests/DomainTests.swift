@@ -215,6 +215,24 @@ struct DemoStoreTests {
         #expect(store.invoices[0].outstanding == 0)
     }
 
+    @Test("Google workspaces keep local records separate")
+    func workspaceIsolation() {
+        let store = freshStore()
+        let firstUser = GoogleAccount(projectID: "project-one", uid: UUID().uuidString, email: "", displayName: "")
+        let secondUser = GoogleAccount(projectID: "project-two", uid: firstUser.uid, email: "", displayName: "")
+        store.switchWorkspace(to: firstUser)
+        store.addCustomer(Customer(name: "First account only", phone: "", email: "", address: ""))
+
+        store.switchWorkspace(to: secondUser)
+        #expect(!store.customers.contains { $0.name == "First account only" })
+
+        store.switchWorkspace(to: firstUser)
+        #expect(store.customers.contains { $0.name == "First account only" })
+
+        store.switchWorkspace(to: nil)
+        #expect(!store.customers.contains { $0.name == "First account only" })
+    }
+
     @Test("Product lookup uses normalized barcode values")
     func productLookup() {
         let store = freshStore()

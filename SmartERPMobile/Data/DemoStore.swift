@@ -38,6 +38,7 @@ final class DemoStore {
         var visits: [Visit]
     }
 
+    @ObservationIgnored private var activeRecordKey = "primary"
     @ObservationIgnored private var modelContainer: ModelContainer?
     @ObservationIgnored private var modelContext: ModelContext?
 
@@ -74,9 +75,8 @@ final class DemoStore {
         guard let modelContext else { return false }
 
         do {
-            var descriptor = FetchDescriptor<DatabaseSnapshotRecord>()
-            descriptor.fetchLimit = 1
-            guard let record = try modelContext.fetch(descriptor).first else { return false }
+            let records = try modelContext.fetch(FetchDescriptor<DatabaseSnapshotRecord>())
+            guard let record = records.first(where: { $0.key == activeRecordKey }) else { return false }
             let snapshot = try JSONDecoder().decode(Snapshot.self, from: record.payload)
             apply(snapshot)
             lastSaved = record.updatedAt
@@ -84,6 +84,17 @@ final class DemoStore {
         } catch {
             message = "Could not read the local database: \(error.localizedDescription)"
             return false
+        }
+    }
+
+    func switchWorkspace(to account: GoogleAccount?) {
+        let nextKey = account.map { "google-\($0.projectID)-\($0.uid)" } ?? "primary"
+        guard nextKey != activeRecordKey else { return }
+        activeRecordKey = nextKey
+        if !loadFromDatabase() {
+            customers = []; products = []; orders = []; purchases = []; invoices = []; visits = []
+            lastSaved = nil
+            seed()
         }
     }
 
@@ -137,15 +148,14 @@ final class DemoStore {
         let snapshot = Snapshot(customers: customers, products: products, orders: orders, purchases: purchases, invoices: invoices, visits: visits)
         do {
             let data = try JSONEncoder().encode(snapshot)
-            var descriptor = FetchDescriptor<DatabaseSnapshotRecord>()
-            descriptor.fetchLimit = 1
+            let records = try modelContext.fetch(FetchDescriptor<DatabaseSnapshotRecord>())
             let savedAt = Date.now
 
-            if let record = try modelContext.fetch(descriptor).first {
+            if let record = records.first(where: { $0.key == activeRecordKey }) {
                 record.payload = data
                 record.updatedAt = savedAt
             } else {
-                modelContext.insert(DatabaseSnapshotRecord(payload: data, updatedAt: savedAt))
+                modelContext.insert(DatabaseSnapshotRecord(key: activeRecordKey, payload: data, updatedAt: savedAt))
             }
 
             try modelContext.save()

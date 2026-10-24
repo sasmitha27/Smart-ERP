@@ -2,7 +2,7 @@
 
 Native iPhone ERP prototype for iOS 17 and later. Open `SmartERPMobile.xcodeproj` in Xcode 27.
 
-The app starts in an explicitly labelled **local demo workspace**. Customer, product, order, purchase, receipt, invoice and visit data is stored on device for evaluation. No demo action posts to Inventolo or sends notifications to other people. Firebase upload occurs only when explicitly requested in settings. Financial and stock records in this workspace are sample records, not authoritative business records.
+The app starts with a choice between a local demo workspace and Google sign-in for a separate account workspace. Customer, product, order, purchase, receipt, invoice and visit data is stored on device for evaluation. No demo action posts to Inventolo or sends notifications to other people. Firebase upload occurs only when explicitly requested in settings. Financial and stock records in this workspace are sample records, not authoritative business records.
 
 ## Run
 
@@ -63,7 +63,7 @@ The `SmartERPWidgets` extension provides **Business overview** and **Next visit*
 
 For a signed device build, replace `com.example.SmartERPMobile`, `com.example.SmartERPMobile.widgets`, and `group.com.example.SmartERPMobile` consistently with identifiers owned by your Apple Developer team. Enable the App Groups capability for both targets and register the group. Enable Live Activities for the app if your signing setup requires it.
 
-Firebase backup uses Firebase Authentication and Firestore REST APIs. In the Firebase console, create a Firestore database and enable **Anonymous** sign-in. In **More → Firebase backup**, enter the Firebase project ID and Web API key. Upload explicitly saves the full local demo snapshot to `users/{auth.uid}/backups/current`; restore explicitly replaces local records after confirmation. The anonymous refresh token is stored in Keychain on this installation. Losing the installation or Keychain identity means that this backup cannot be restored by a new anonymous identity. This is a single-device evaluation backup, not multi-user ERP sync.
+Firebase backup uses Firebase Authentication and Firestore REST APIs. In the Firebase console, create a Firestore database and enable **Google** sign-in. In **Sign in with Google** (or **More → Google sign-in**), enter the Firebase project ID and Web API key. Upload explicitly saves the current account workspace snapshot to `users/{auth.uid}/backups/current`; restore explicitly replaces local records after confirmation. The Firebase refresh token is stored in Keychain. Signing into the same Google account on another device can restore its cloud snapshot. Local records are separated by Firebase user ID. This is explicit snapshot backup, not automatic ERP sync.
 
 A minimal Firestore rule for this backup path is:
 
@@ -78,4 +78,13 @@ service cloud.firestore {
 }
 ```
 
-Publish rules in the Firebase console before using backup. Set stricter size and validation limits before production use. Firebase credentials were not supplied in this repository, so the live cloud round trip needs validation with your project.
+Publish rules in the Firebase console before using backup. Set stricter size and validation limits before production use. Firebase and Google credentials were not supplied in this repository, so the sign-in and cloud round trip need validation with your project.
+
+## Google sign-in setup
+
+1. Register the app's final iOS bundle ID in Firebase and Google Cloud. In Firebase Authentication, enable the **Google** provider and select a support email.
+2. In `SmartERPMobile/Info.plist`, replace `YOUR_IOS_CLIENT_ID` with the iOS OAuth client ID (ending in `.apps.googleusercontent.com`) and `YOUR_REVERSED_CLIENT_ID` with that same client ID reversed by dot-delimited parts (for example, `com.googleusercontent.apps.123-abc`). These values must belong to the same app bundle ID used for signing.
+3. Run the app, open **Sign in with Google**, and enter the Firebase project ID and Web API key. These are project identifiers, not a service-account secret. The app exchanges Google's ID token with Firebase Authentication, then stores Firebase's refresh token in Keychain.
+4. Sign in and use **More → Firebase backup** to upload or restore data. Signing out returns to the local demo workspace. Each Google account has a separate local database snapshot.
+
+The Google Sign-In SDK is installed with Swift Package Manager and its version is pinned in `Package.resolved`. Existing anonymous Firebase backups from older builds are not linked automatically to a Google account; existing local demo records remain in the demo workspace. Inventolo service authentication still requires its own API contract.

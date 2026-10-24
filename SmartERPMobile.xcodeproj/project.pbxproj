@@ -22,8 +22,19 @@
 		8A279AD7D81993F8A8334CF5 /* SmartERPMobile/Features/Dashboard/DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA83FBE64CD11DBC957614AE /* SmartERPMobile/Features/Dashboard/DashboardView.swift */; };
 		902D785E515808BDAA3A83E5 /* SmartERPMobile/Features/Operations/TeamMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F1D232474EDDA50EDB5014 /* SmartERPMobile/Features/Operations/TeamMapView.swift */; };
 		90577E7C71B888B636DB1E17 /* SmartERPMobile/Core/BarcodeScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5982A07B4928CD684BC3C402 /* SmartERPMobile/Core/BarcodeScanner.swift */; };
+		A10000000000000000000001 /* SmartERPMobile/Shared/WidgetData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000011 /* SmartERPMobile/Shared/WidgetData.swift */; };
+		A10000000000000000000002 /* SmartERPMobile/Shared/WorkActivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000012 /* SmartERPMobile/Shared/WorkActivityManager.swift */; };
+		A10000000000000000000003 /* SmartERPMobile/Core/FirebaseBackup.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000013 /* SmartERPMobile/Core/FirebaseBackup.swift */; };
+		A10000000000000000000004 /* SmartERPMobile/Features/Settings/FirebaseBackupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000014 /* SmartERPMobile/Features/Settings/FirebaseBackupView.swift */; };
+		A10000000000000000000005 /* SmartERPMobile/Shared/WidgetData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000011 /* SmartERPMobile/Shared/WidgetData.swift */; };
+		A10000000000000000000006 /* SmartERPWidgets.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000015 /* SmartERPWidgets.swift */; };
+		A10000000000000000000007 /* SmartERPWidgets.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = A10000000000000000000016 /* SmartERPWidgets.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		A42D421A308BDF3600D1E435 /* BusinessAssistant.swift in Sources */ = {isa = PBXBuildFile; fileRef = A42D4219308BDF3600D1E435 /* BusinessAssistant.swift */; };
 		A42D421C308BDF3600D1E435 /* AssistantView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A42D421B308BDF3600D1E435 /* AssistantView.swift */; };
+		B20000000000000000000001 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = B20000000000000000000004 /* GoogleSignIn */; };
+		B20000000000000000000002 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = B20000000000000000000005 /* GoogleSignInSwift */; };
+		B20000000000000000000003 /* SmartERPMobile/Core/GoogleAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000000000000000000006 /* SmartERPMobile/Core/GoogleAuthService.swift */; };
+		B20000000000000000000008 /* SmartERPMobile/Features/Onboarding/GoogleLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000000000000000000009 /* SmartERPMobile/Features/Onboarding/GoogleLoginView.swift */; };
 		DAD5CE1CE4A3ABD7C0C80F22 /* SmartERPTests/DomainTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FCB7650B9AEDE18C07CAE2 /* SmartERPTests/DomainTests.swift */; };
 		DB564AC5418E0D827BE6CE8F /* SmartERPMobile/Features/Sales/OrderAndInvoiceViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25119872E79719B90560D8F /* SmartERPMobile/Features/Sales/OrderAndInvoiceViews.swift */; };
 		E2E475D77E08D1BDADFE535C /* SmartERPMobile/Features/Purchasing/PurchasingViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11AC9EEC5F4FE23FE1B5C5B /* SmartERPMobile/Features/Purchasing/PurchasingViews.swift */; };
@@ -31,13 +42,6 @@
 		EE2C4E6DFE1AEE6126943009 /* SmartERPMobile/Features/Transactions/TransactionForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 709E53BB3C17A2A7C657BDC2 /* SmartERPMobile/Features/Transactions/TransactionForm.swift */; };
 		F2CDD65495302DA06211F72D /* SmartERPMobile/Features/Onboarding/WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E85EE06E5E5257F03B2CB659 /* SmartERPMobile/Features/Onboarding/WelcomeView.swift */; };
 		F484576E68D797CF5F6CB521 /* SmartERPMobile/Features/Operations/WorkSessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A189B11373AE8BD8B4C6D924 /* SmartERPMobile/Features/Operations/WorkSessionView.swift */; };
-		A10000000000000000000001 /* WidgetData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000011; };
-		A10000000000000000000002 /* WorkActivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000012; };
-		A10000000000000000000003 /* FirebaseBackup.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000013; };
-		A10000000000000000000004 /* FirebaseBackupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000014; };
-		A10000000000000000000005 /* WidgetData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000011; };
-		A10000000000000000000006 /* SmartERPWidgets.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000015; };
-		A10000000000000000000007 /* SmartERPWidgets.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = A10000000000000000000016; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,8 +52,28 @@
 			remoteGlobalIDString = 0E8A3AD980EC179856012B7E;
 			remoteInfo = SmartERPMobile;
 		};
-		A10000000000000000000028 /* Widget proxy */ = {isa = PBXContainerItemProxy; containerPortal = 98F54143AB4E86B28C3AFEE0; proxyType = 1; remoteGlobalIDString = A10000000000000000000026; remoteInfo = SmartERPWidgets; };
+		A10000000000000000000028 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 98F54143AB4E86B28C3AFEE0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A10000000000000000000026;
+			remoteInfo = SmartERPWidgets;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		A10000000000000000000021 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				A10000000000000000000007 /* SmartERPWidgets.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		19FCB7650B9AEDE18C07CAE2 /* SmartERPTests/DomainTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartERPTests/DomainTests.swift; sourceTree = "<group>"; };
@@ -63,10 +87,18 @@
 		8ED46F91FB31AC8D16172F9E /* SmartERPTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; path = SmartERPTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		92F1D232474EDDA50EDB5014 /* SmartERPMobile/Features/Operations/TeamMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartERPMobile/Features/Operations/TeamMapView.swift; sourceTree = "<group>"; };
 		9F612797D3040F15ED8312A4 /* SmartERPMobile/App/RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartERPMobile/App/RootView.swift; sourceTree = "<group>"; };
+		A10000000000000000000011 /* SmartERPMobile/Shared/WidgetData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartERPMobile/Shared/WidgetData.swift; sourceTree = "<group>"; };
+		A10000000000000000000012 /* SmartERPMobile/Shared/WorkActivityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartERPMobile/Shared/WorkActivityManager.swift; sourceTree = "<group>"; };
+		A10000000000000000000013 /* SmartERPMobile/Core/FirebaseBackup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartERPMobile/Core/FirebaseBackup.swift; sourceTree = "<group>"; };
+		A10000000000000000000014 /* SmartERPMobile/Features/Settings/FirebaseBackupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartERPMobile/Features/Settings/FirebaseBackupView.swift; sourceTree = "<group>"; };
+		A10000000000000000000015 /* SmartERPWidgets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartERPWidgets.swift; sourceTree = "<group>"; };
+		A10000000000000000000016 /* SmartERPWidgets.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; path = SmartERPWidgets.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		A11AC9EEC5F4FE23FE1B5C5B /* SmartERPMobile/Features/Purchasing/PurchasingViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartERPMobile/Features/Purchasing/PurchasingViews.swift; sourceTree = "<group>"; };
 		A189B11373AE8BD8B4C6D924 /* SmartERPMobile/Features/Operations/WorkSessionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartERPMobile/Features/Operations/WorkSessionView.swift; sourceTree = "<group>"; };
 		A42D4219308BDF3600D1E435 /* BusinessAssistant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessAssistant.swift; sourceTree = "<group>"; };
 		A42D421B308BDF3600D1E435 /* AssistantView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssistantView.swift; sourceTree = "<group>"; };
+		B20000000000000000000006 /* SmartERPMobile/Core/GoogleAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartERPMobile/Core/GoogleAuthService.swift; sourceTree = "<group>"; };
+		B20000000000000000000009 /* SmartERPMobile/Features/Onboarding/GoogleLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartERPMobile/Features/Onboarding/GoogleLoginView.swift; sourceTree = "<group>"; };
 		B25119872E79719B90560D8F /* SmartERPMobile/Features/Sales/OrderAndInvoiceViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartERPMobile/Features/Sales/OrderAndInvoiceViews.swift; sourceTree = "<group>"; };
 		BBF3D888934D30B911DB16C0 /* SmartERPMobile/Core/Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartERPMobile/Core/Theme.swift; sourceTree = "<group>"; };
 		CFDD2B58B79775EACFFFDD60 /* SmartERPMobile/Features/Sales/SalesViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartERPMobile/Features/Sales/SalesViews.swift; sourceTree = "<group>"; };
@@ -78,26 +110,25 @@
 		EA83FBE64CD11DBC957614AE /* SmartERPMobile/Features/Dashboard/DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartERPMobile/Features/Dashboard/DashboardView.swift; sourceTree = "<group>"; };
 		EB20782B2E10CC22C5F2C2AF /* SmartERPMobile/Data/DemoStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartERPMobile/Data/DemoStore.swift; sourceTree = "<group>"; };
 		F6D025273059E931872ED6CF /* SmartERPMobile/Features/Inventory/InventoryViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartERPMobile/Features/Inventory/InventoryViews.swift; sourceTree = "<group>"; };
-		A10000000000000000000011 /* WidgetData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartERPMobile/Shared/WidgetData.swift; sourceTree = "<group>"; };
-		A10000000000000000000012 /* WorkActivityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartERPMobile/Shared/WorkActivityManager.swift; sourceTree = "<group>"; };
-		A10000000000000000000013 /* FirebaseBackup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartERPMobile/Core/FirebaseBackup.swift; sourceTree = "<group>"; };
-		A10000000000000000000014 /* FirebaseBackupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartERPMobile/Features/Settings/FirebaseBackupView.swift; sourceTree = "<group>"; };
-		A10000000000000000000015 /* SmartERPWidgets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartERPWidgets.swift; sourceTree = "<group>"; };
-		A10000000000000000000016 /* SmartERPWidgets.appex */ = {isa = PBXFileReference; explicitFileType = wrapper.app-extension; path = SmartERPWidgets.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
-/* Begin PBXCopyFilesBuildPhase section */
-		A10000000000000000000021 /* Embed App Extensions */ = {isa = PBXCopyFilesBuildPhase; buildActionMask = 2147483647; dstPath = ""; dstSubfolderSpec = 13; files = (A10000000000000000000007, ); name = "Embed App Extensions"; runOnlyForDeploymentPostprocessing = 0; };
-/* End PBXCopyFilesBuildPhase section */
 /* Begin PBXFrameworksBuildPhase section */
 		7561BFB015D8F536760CB671 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B20000000000000000000001 /* GoogleSignIn in Frameworks */,
+				B20000000000000000000002 /* GoogleSignInSwift in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A10000000000000000000022 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A10000000000000000000022 /* Frameworks */ = {isa = PBXFrameworksBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0; };
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -166,7 +197,7 @@
 			isa = PBXGroup;
 			children = (
 				E71D39188CCC9C701EEA45F0 /* SmartERPMobile/Features/Settings/MoreView.swift */,
-				A10000000000000000000014 /* FirebaseBackupView.swift */,
+				A10000000000000000000014 /* SmartERPMobile/Features/Settings/FirebaseBackupView.swift */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -209,11 +240,29 @@
 			isa = PBXGroup;
 			children = (
 				839309B1348766642B14BE2E /* SmartERPMobile/Core/APIClient.swift */,
-				A10000000000000000000013 /* FirebaseBackup.swift */,
+				A10000000000000000000013 /* SmartERPMobile/Core/FirebaseBackup.swift */,
+				B20000000000000000000006 /* SmartERPMobile/Core/GoogleAuthService.swift */,
 				5982A07B4928CD684BC3C402 /* SmartERPMobile/Core/BarcodeScanner.swift */,
 				BBF3D888934D30B911DB16C0 /* SmartERPMobile/Core/Theme.swift */,
 			);
 			name = Core;
+			sourceTree = "<group>";
+		};
+		A10000000000000000000023 /* SmartERPWidgets */ = {
+			isa = PBXGroup;
+			children = (
+				A10000000000000000000015 /* SmartERPWidgets.swift */,
+			);
+			path = SmartERPWidgets;
+			sourceTree = "<group>";
+		};
+		A10000000000000000000024 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				A10000000000000000000011 /* SmartERPMobile/Shared/WidgetData.swift */,
+				A10000000000000000000012 /* SmartERPMobile/Shared/WorkActivityManager.swift */,
+			);
+			name = Shared;
 			sourceTree = "<group>";
 		};
 		A42D4218308BDF3600D1E435 /* Assistant */ = {
@@ -250,6 +299,7 @@
 			isa = PBXGroup;
 			children = (
 				E85EE06E5E5257F03B2CB659 /* SmartERPMobile/Features/Onboarding/WelcomeView.swift */,
+				B20000000000000000000009 /* SmartERPMobile/Features/Onboarding/GoogleLoginView.swift */,
 			);
 			name = Onboarding;
 			sourceTree = "<group>";
@@ -282,8 +332,6 @@
 			name = Sales;
 			sourceTree = "<group>";
 		};
-		A10000000000000000000023 /* SmartERPWidgets */ = {isa = PBXGroup; children = (A10000000000000000000015, ); path = SmartERPWidgets; sourceTree = "<group>"; };
-		A10000000000000000000024 /* Shared */ = {isa = PBXGroup; children = (A10000000000000000000011, A10000000000000000000012, ); name = Shared; sourceTree = "<group>"; };
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -298,12 +346,32 @@
 			buildRules = (
 			);
 			dependencies = (
-				A10000000000000000000025 /* Widget dependency */,
+				A10000000000000000000025 /* PBXTargetDependency */,
 			);
 			name = SmartERPMobile;
+			packageProductDependencies = (
+				B20000000000000000000004 /* GoogleSignIn */,
+				B20000000000000000000005 /* GoogleSignInSwift */,
+			);
 			productName = SmartERPMobile;
 			productReference = 6D795F13C8C22E022040EE00 /* SmartERPMobile.app */;
 			productType = "com.apple.product-type.application";
+		};
+		A10000000000000000000026 /* SmartERPWidgets */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A10000000000000000000031 /* Build configuration list for PBXNativeTarget "SmartERPWidgets" */;
+			buildPhases = (
+				A10000000000000000000027 /* Sources */,
+				A10000000000000000000022 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SmartERPWidgets;
+			productName = SmartERPWidgets;
+			productReference = A10000000000000000000016 /* SmartERPWidgets.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 		B2BFE0D3C68337315431B2F3 /* SmartERPTests */ = {
 			isa = PBXNativeTarget;
@@ -321,7 +389,6 @@
 			productReference = 8ED46F91FB31AC8D16172F9E /* SmartERPTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		A10000000000000000000026 /* SmartERPWidgets */ = {isa = PBXNativeTarget; buildConfigurationList = A10000000000000000000031; buildPhases = (A10000000000000000000027, A10000000000000000000022, ); buildRules = (); dependencies = (); name = SmartERPWidgets; productName = SmartERPWidgets; productReference = A10000000000000000000016; productType = "com.apple.product-type.app-extension"; };
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -344,6 +411,9 @@
 				Base,
 			);
 			mainGroup = 870B3294C0CBD48AF6BBCC1B;
+			packageReferences = (
+				B20000000000000000000007 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
+			);
 			productRefGroup = 7168E62E5CDB0DF79ADF5742 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -364,6 +434,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A10000000000000000000027 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A10000000000000000000005 /* SmartERPMobile/Shared/WidgetData.swift in Sources */,
+				A10000000000000000000006 /* SmartERPWidgets.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BCE16DD0260827ECF338C787 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -371,10 +450,11 @@
 				189615E8C0940CFCDD09E74E /* SmartERPMobile/App/RootView.swift in Sources */,
 				6AF1DAE083A13D924FB99F41 /* SmartERPMobile/App/SmartERPApp.swift in Sources */,
 				1AACAFE632B2B635433F06ED /* SmartERPMobile/Core/APIClient.swift in Sources */,
-				A10000000000000000000003 /* FirebaseBackup.swift in Sources */,
-				A10000000000000000000004 /* FirebaseBackupView.swift in Sources */,
-				A10000000000000000000001 /* WidgetData.swift in Sources */,
-				A10000000000000000000002 /* WorkActivityManager.swift in Sources */,
+				A10000000000000000000003 /* SmartERPMobile/Core/FirebaseBackup.swift in Sources */,
+				B20000000000000000000003 /* SmartERPMobile/Core/GoogleAuthService.swift in Sources */,
+				A10000000000000000000004 /* SmartERPMobile/Features/Settings/FirebaseBackupView.swift in Sources */,
+				A10000000000000000000001 /* SmartERPMobile/Shared/WidgetData.swift in Sources */,
+				A10000000000000000000002 /* SmartERPMobile/Shared/WorkActivityManager.swift in Sources */,
 				90577E7C71B888B636DB1E17 /* SmartERPMobile/Core/BarcodeScanner.swift in Sources */,
 				A42D421A308BDF3600D1E435 /* BusinessAssistant.swift in Sources */,
 				3C42259BFE54C22FFC77FA67 /* SmartERPMobile/Core/Theme.swift in Sources */,
@@ -384,6 +464,7 @@
 				8A279AD7D81993F8A8334CF5 /* SmartERPMobile/Features/Dashboard/DashboardView.swift in Sources */,
 				559416C30D8FE0215D56B884 /* SmartERPMobile/Features/Inventory/InventoryViews.swift in Sources */,
 				F2CDD65495302DA06211F72D /* SmartERPMobile/Features/Onboarding/WelcomeView.swift in Sources */,
+				B20000000000000000000008 /* SmartERPMobile/Features/Onboarding/GoogleLoginView.swift in Sources */,
 				A42D421C308BDF3600D1E435 /* AssistantView.swift in Sources */,
 				221A29B449B77875EC999A28 /* SmartERPMobile/Features/Operations/OperationsView.swift in Sources */,
 				902D785E515808BDAA3A83E5 /* SmartERPMobile/Features/Operations/TeamMapView.swift in Sources */,
@@ -398,7 +479,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A10000000000000000000027 /* Sources */ = {isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = (A10000000000000000000005, A10000000000000000000006, ); runOnlyForDeploymentPostprocessing = 0; };
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -407,7 +487,11 @@
 			target = 0E8A3AD980EC179856012B7E /* SmartERPMobile */;
 			targetProxy = 1E97255040C230EDFA9D74C5 /* PBXContainerItemProxy */;
 		};
-		A10000000000000000000025 /* Widget dependency */ = {isa = PBXTargetDependency; target = A10000000000000000000026; targetProxy = A10000000000000000000028; };
+		A10000000000000000000025 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A10000000000000000000026 /* SmartERPWidgets */;
+			targetProxy = A10000000000000000000028 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
@@ -415,13 +499,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = NO;
+				CODE_SIGN_ENTITLEMENTS = SmartERPMobile/SmartERPMobile.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
-				GENERATE_INFOPLIST_FILE = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = SmartERPMobile/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "Scan product barcodes for lookup and transaction drafts.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Show your location during an explicit work session on this device.";
 				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
-				CODE_SIGN_ENTITLEMENTS = SmartERPMobile/SmartERPMobile.entitlements;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.SmartERPMobile;
@@ -438,17 +523,19 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = NO;
+				CODE_SIGN_ENTITLEMENTS = SmartERPMobile/SmartERPMobile.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = "";
 				ENABLE_TESTABILITY = YES;
-				GENERATE_INFOPLIST_FILE = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = SmartERPMobile/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "Scan product barcodes for lookup and transaction drafts.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Show your location during an explicit work session on this device.";
 				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
-				CODE_SIGN_ENTITLEMENTS = SmartERPMobile/SmartERPMobile.entitlements;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.SmartERPMobile;
 				PRODUCT_NAME = SmartERPMobile;
 				SDKROOT = iphoneos;
@@ -463,15 +550,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = NO;
+				CODE_SIGN_ENTITLEMENTS = SmartERPMobile/SmartERPMobile.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = "";
 				ENABLE_TESTABILITY = YES;
-				GENERATE_INFOPLIST_FILE = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = SmartERPMobile/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "Scan product barcodes for lookup and transaction drafts.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Show your location during an explicit work session on this device.";
 				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
-				CODE_SIGN_ENTITLEMENTS = SmartERPMobile/SmartERPMobile.entitlements;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.SmartERPMobile;
@@ -514,19 +602,55 @@
 			};
 			name = Debug;
 		};
+		A10000000000000000000029 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = SmartERPWidgets/SmartERPWidgets.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = SmartERPWidgets/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.SmartERPMobile.widgets;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		A10000000000000000000030 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = SmartERPWidgets/SmartERPWidgets.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = SmartERPWidgets/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.SmartERPMobile.widgets;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
 		AF08645F33FB7E7450F93573 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = NO;
+				CODE_SIGN_ENTITLEMENTS = SmartERPMobile/SmartERPMobile.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
-				GENERATE_INFOPLIST_FILE = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = SmartERPMobile/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "Scan product barcodes for lookup and transaction drafts.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Show your location during an explicit work session on this device.";
 				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
-				CODE_SIGN_ENTITLEMENTS = SmartERPMobile/SmartERPMobile.entitlements;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.SmartERPMobile;
 				PRODUCT_NAME = SmartERPMobile;
 				SDKROOT = iphoneos;
@@ -537,8 +661,6 @@
 			};
 			name = Release;
 		};
-		A10000000000000000000029 /* Widget Debug */ = {isa = XCBuildConfiguration; buildSettings = { CODE_SIGN_ENTITLEMENTS = SmartERPWidgets/SmartERPWidgets.entitlements; CODE_SIGN_STYLE = Automatic; GENERATE_INFOPLIST_FILE = NO; INFOPLIST_FILE = SmartERPWidgets/Info.plist; IPHONEOS_DEPLOYMENT_TARGET = 17.0; PRODUCT_BUNDLE_IDENTIFIER = com.example.SmartERPMobile.widgets; PRODUCT_NAME = "$(TARGET_NAME)"; SDKROOT = iphoneos; SKIP_INSTALL = YES; SWIFT_VERSION = 5.0; TARGETED_DEVICE_FAMILY = 1; }; name = Debug; };
-		A10000000000000000000030 /* Widget Release */ = {isa = XCBuildConfiguration; buildSettings = { CODE_SIGN_ENTITLEMENTS = SmartERPWidgets/SmartERPWidgets.entitlements; CODE_SIGN_STYLE = Automatic; GENERATE_INFOPLIST_FILE = NO; INFOPLIST_FILE = SmartERPWidgets/Info.plist; IPHONEOS_DEPLOYMENT_TARGET = 17.0; PRODUCT_BUNDLE_IDENTIFIER = com.example.SmartERPMobile.widgets; PRODUCT_NAME = "$(TARGET_NAME)"; SDKROOT = iphoneos; SKIP_INSTALL = YES; SWIFT_VERSION = 5.0; TARGETED_DEVICE_FAMILY = 1; }; name = Release; };
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -569,8 +691,40 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A10000000000000000000031 /* Widget config */ = {isa = XCConfigurationList; buildConfigurations = (A10000000000000000000029, A10000000000000000000030, ); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release; };
+		A10000000000000000000031 /* Build configuration list for PBXNativeTarget "SmartERPWidgets" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A10000000000000000000029 /* Debug */,
+				A10000000000000000000030 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		B20000000000000000000007 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/google/GoogleSignIn-iOS";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		B20000000000000000000004 /* GoogleSignIn */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B20000000000000000000007 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignIn;
+		};
+		B20000000000000000000005 /* GoogleSignInSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B20000000000000000000007 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignInSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 98F54143AB4E86B28C3AFEE0 /* Project object */;
 }
